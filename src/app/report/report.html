@@ -1,0 +1,43 @@
+<h1>Doom Scrolling Report</h1>
+
+<p>Report component is working.</p>
+
+<p>Rows: {{ csvData.length }}</p>
+
+@if (csvData.length > 0) {
+<!-- Header -->
+<div class="table-header">
+
+    @for (column of columns; track column) {
+    <div class="cell header-cell">
+        {{ column }}
+    </div>
+    }
+
+</div>
+
+<!-- Virtual scrolling -->
+<cdk-virtual-scroll-viewport itemSize="45" class="viewport">
+    <div class="table-row" *cdkVirtualFor="let row of csvData">
+        @for (column of columns; track column) {
+        <div class="cell">
+            {{ row[column] }}
+        </div>
+        }
+    </div>
+</cdk-virtual-scroll-viewport>
+
+<!-- list items -->
+<!-- <div *ngFor="let row of csvData">
+    <div class="table-row">
+        @for (column of columns; track column) {
+        <div class="cell">
+            {{ row[column] }}
+        </div>
+        }
+    </div>
+</div> -->
+}
+@else {
+<p>Loading CSV data...</p>
+}
